@@ -1,11 +1,11 @@
 import requests
 from pyrogram import Client as Bot
 
-from xmusicbbot.config import API_HASH
-from xmusicbbot.config import API_ID
-from xmusicbbot.config import BG_IMAGE
-from xmusicbbot.config import BOT_TOKEN
-from xmusicbbot.services.callsmusic import run
+from VCPlayBot.config import API_HASH
+from VCPlayBot.config import API_ID
+from VCPlayBot.config import BG_IMAGE
+from VCPlayBot.config import BOT_TOKEN
+from VCPlayBot.services.callsmusic import run
 
 response = requests.get(BG_IMAGE)
 file = open("./etc/foreground.png", "wb")
@@ -17,7 +17,7 @@ bot = Bot(
     API_ID,
     API_HASH,
     bot_token=BOT_TOKEN,
-    plugins=dict(root="xmusicbbot.modules"),
+    plugins=dict(root="VCPlayBot.modules"),
 )
 
 bot.start()
