@@ -1,6 +1,8 @@
 from typing import Union
 
-from pyrogram.types import Audio, Message, Voice
+from pyrogram.types import Audio
+from pyrogram.types import Message
+from pyrogram.types import Voice
 
 
 def get_url(message_1: Message) -> Union[str, None]:
