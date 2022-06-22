@@ -1,12 +1,14 @@
+
 from os import path
 
 from youtube_dl import YoutubeDL
 
-from xmusicbbot.config import DURATION_LIMIT
-from xmusicbbot.helpers.errors import DurationLimitError
+from VCPlayBot.config import DURATION_LIMIT
+from VCPlayBot.helpers.errors import DurationLimitError
 
 ydl_opts = {
-    "format": "bestaudio[ext=m4a]",
+    "format": "bestaudio/best",
+    "verbose": True,
     "geo-bypass": True,
     "nocheckcertificate": True,
     "outtmpl": "downloads/%(id)s.%(ext)s",

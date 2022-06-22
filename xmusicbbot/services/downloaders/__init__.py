@@ -1,3 +1,3 @@
-from xmusicbbot.services.downloaders import youtube
+from VCPlayBot.services.downloaders import youtube
 
 __all__ = ["youtube"]
