@@ -1,3 +1,4 @@
+
 import io
 import os
 
@@ -9,7 +10,7 @@ from pyrogram import Client as pbot
 
 
 
-# Lel, Didn't Get Time To Make New One So Used Plugin Made br @B100Q and @xb_0b dont edit credits
+# Lel, Didn't Get Time To Make New One So Used Plugin Made br @mrconfused and @sandy1709 dont edit credits
 
 
 @pbot.on_message(filters.command(["lyric", "lyrics"]))

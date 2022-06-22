@@ -2,8 +2,8 @@ from pyrogram import Client
 from pyrogram import filters
 from pyrogram.types import Message
 
-from xmusicbbot.services.callsmusic.callsmusic import remove
-from xmusicbbot.helpers.channelmusic import get_chat_id
+from VCPlayBot.services.callsmusic.callsmusic import remove
+from VCPlayBot.helpers.channelmusic import get_chat_id
 
 
 @Client.on_message(filters.voice_chat_ended)

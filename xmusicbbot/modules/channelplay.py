@@ -1,3 +1,5 @@
+
+
 import json
 from os import path
 from typing import Callable
@@ -17,31 +19,31 @@ from pyrogram.types import Voice
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 from Python_ARQ import ARQ
 from youtube_search import YoutubeSearch
-from xmusicbbot.modules.play import generate_cover
-from xmusicbbot.modules.play import arq
-from xmusicbbot.modules.play import cb_admin_check
-from xmusicbbot.modules.play import transcode
-from xmusicbbot.modules.play import convert_seconds
-from xmusicbbot.modules.play import time_to_seconds
-from xmusicbbot.modules.play import changeImageSize
-from xmusicbbot.config import BOT_NAME as bn
-from xmusicbbot.config import DURATION_LIMIT
-from xmusicbbot.config import UPDATES_CHANNEL as updateschannel
-from xmusicbbot.config import que
-from xmusicbbot.function.admins import admins as a
-from xmusicbbot.helpers.errors import DurationLimitError
-from xmusicbbot.helpers.decorators import errors
-from xmusicbbot.helpers.admins import get_administrators
-from xmusicbbot.helpers.channelmusic import get_chat_id
-from xmusicbbot.helpers.decorators import authorized_users_only
-from xmusicbbot.helpers.filters import command
-from xmusicbbot.helpers.filters import other_filters
-from xmusicbbot.helpers.gets import get_file_name
-from xmusicbbot.services.callsmusic import callsmusic
-from xmusicbbot.services.callsmusic import client as USER
-from xmusicbbot.services.converter.converter import convert
-from xmusicbbot.services.downloaders import youtube
-from xmusicbbot.services.queues import queues
+from VCPlayBot.modules.play import generate_cover
+from VCPlayBot.modules.play import arq
+from VCPlayBot.modules.play import cb_admin_check
+from VCPlayBot.modules.play import transcode
+from VCPlayBot.modules.play import convert_seconds
+from VCPlayBot.modules.play import time_to_seconds
+from VCPlayBot.modules.play import changeImageSize
+from VCPlayBot.config import BOT_NAME as bn
+from VCPlayBot.config import DURATION_LIMIT
+from VCPlayBot.config import UPDATES_CHANNEL as updateschannel
+from VCPlayBot.config import que
+from VCPlayBot.function.admins import admins as a
+from VCPlayBot.helpers.errors import DurationLimitError
+from VCPlayBot.helpers.decorators import errors
+from VCPlayBot.helpers.admins import get_administrators
+from VCPlayBot.helpers.channelmusic import get_chat_id
+from VCPlayBot.helpers.decorators import authorized_users_only
+from VCPlayBot.helpers.filters import command
+from VCPlayBot.helpers.filters import other_filters
+from VCPlayBot.helpers.gets import get_file_name
+from VCPlayBot.services.callsmusic import callsmusic
+from VCPlayBot.services.callsmusic import client as USER
+from VCPlayBot.services.converter.converter import convert
+from VCPlayBot.services.downloaders import youtube
+from VCPlayBot.services.queues import queues
 
 chat_id = None
 
@@ -470,7 +472,7 @@ async def play(_, message: Message):
     elif urls:
         query = toxt
         await lel.edit("🎵 **Processing**")
-        ydl_opts = {"format": "bestaudio[ext=m4a]"}
+        ydl_opts = {"format": "bestaudio/best"}
         try:
             results = YoutubeSearch(query, max_results=1).to_dict()
             url = f"https://youtube.com{results[0]['url_suffix']}"
@@ -524,7 +526,7 @@ async def play(_, message: Message):
             query += " " + str(i)
         print(query)
         await lel.edit("🎵 **Processing**")
-        ydl_opts = {"format": "bestaudio[ext=m4a]"}
+        ydl_opts = {"format": "bestaudio/best"}
         try:
             results = YoutubeSearch(query, max_results=1).to_dict()
             url = f"https://youtube.com{results[0]['url_suffix']}"
@@ -601,143 +603,12 @@ async def play(_, message: Message):
         await message.reply_photo(
             photo="final.png",
             reply_markup=keyboard,
-            caption="▶️ <b>Playing</b> the song requested by {} via YouTube Music in Linked Channel".format(
+            caption="▶️ <b>Playing</b> the song requested by {} via Youtube Music 😎 in Linked Channel".format(
                 message.from_user.mention()
             ),
         )
         os.remove("final.png")
         return await lel.delete()
-
-
-@Client.on_message(filters.command(["channeldplay","cdplay"]) & filters.group & ~filters.edited)
-@authorized_users_only
-async def deezer(client: Client, message_: Message):
-    global que
-    lel = await message_.reply("🔄 <b>Processing</b>")
-
-    try:
-      conchat = await client.get_chat(message_.chat.id)
-      conid = conchat.linked_chat.id
-      conv = conchat.linked_chat
-      chid = conid
-    except:
-      await message_.reply("Is chat even linked")
-      return
-    try:
-      administrators = await get_administrators(conv)
-    except:
-      await message.reply("Am I admin of Channel") 
-    try:
-        user = await USER.get_me()
-    except:
-        user.first_name = "xmusicbbot"
-    usar = user
-    wew = usar.id
-    try:
-        # chatdetails = await USER.get_chat(chid)
-        await client.get_chat_member(chid, wew)
-    except:
-        for administrator in administrators:
-            if administrator == message_.from_user.id:
-                if message_.chat.title.startswith("Channel Music: "):
-                    await lel.edit(
-                        "<b>Remember to add helper to your channel</b>",
-                    )
-                    pass
-                try:
-                    invitelink = await client.export_chat_invite_link(chid)
-                except:
-                    await lel.edit(
-                        "<b>Add me as admin of yor channel first</b>",
-                    )
-                    return
-
-                try:
-                    await USER.join_chat(invitelink)
-                    await lel.edit(
-                        "<b>helper userbot joined your channel</b>",
-                    )
-
-                except UserAlreadyParticipant:
-                    pass
-                except Exception:
-                    # print(e)
-                    await lel.edit(
-                        f"<b>🔴 Flood Wait Error 🔴 \nUser {user.first_name} couldn't join your channel due to heavy requests for userbot! Make sure user is not banned in channel."
-                        "\n\nOr manually add assistant to your Group and try again</b>",
-                    )
-    try:
-        await USER.get_chat(chid)
-        # lmoa = await client.get_chat_member(chid,wew)
-    except:
-        await lel.edit(
-            f"<i> {user.first_name} Userbot not in this channel, Ask admin to send /play command for first time or add {user.first_name} manually</i>"
-        )
-        return
-    requested_by = message_.from_user.first_name
-
-    text = message_.text.split(" ", 1)
-    queryy = text[1]
-    query=queryy
-    res = lel
-    await res.edit(f"Searching 🔍 for `{queryy}` on deezer")
-    try:
-        songs = await arq.deezer(query,1)
-        if not songs.ok:
-            await message_.reply_text(songs.result)
-            return
-        title = songs.result[0].title
-        url = songs.result[0].url
-        artist = songs.result[0].artist
-        duration = songs.result[0].duration
-        thumbnail = songs.result[0].thumbnail
-    except:
-        await res.edit("Found Literally Nothing, You Should Work On Your English!")
-        return
-    keyboard = InlineKeyboardMarkup(
-        [
-            [
-                InlineKeyboardButton("📖 Playlist", callback_data="cplaylist"),
-                InlineKeyboardButton("Menu ⏯ ", callback_data="cmenu"),
-            ],
-            [InlineKeyboardButton(text="Listen On Deezer 🎬", url=f"{url}")],
-            [InlineKeyboardButton(text="❌ Close", callback_data="ccls")],
-        ]
-    )
-    file_path = await convert(wget.download(url))
-    await res.edit("Generating Thumbnail")
-    await generate_cover(requested_by, title, artist, duration, thumbnail)
-    chat_id = chid
-    if chat_id in callsmusic.active_chats:
-        await res.edit("adding in queue")
-        position = await queues.put(chat_id, file=file_path)
-        qeue = que.get(chat_id)
-        s_name = title
-        r_by = message_.from_user
-        loc = file_path
-        appendable = [s_name, r_by, loc]
-        qeue.append(appendable)
-        await res.edit_text(f"✯{bn}✯= #️⃣ Queued at position {position}")
-    else:
-        await res.edit_text(f"✯{bn}✯=▶️ Playing.....")
-
-        que[chat_id] = []
-        qeue = que.get(chat_id)
-        s_name = title
-        r_by = message_.from_user
-        loc = file_path
-        appendable = [s_name, r_by, loc]
-        qeue.append(appendable)
-    await callsmusic.set_stream(chat_id, file_path)
-    await res.delete()
-
-    m = await client.send_photo(
-        chat_id=message_.chat.id,
-        reply_markup=keyboard,
-        photo="final.png",
-        caption=f"Playing [{title}]({url}) Via Deezer in Linked Channel",
-    )
-    os.remove("final.png")
 
 
 @Client.on_message(filters.command(["channelsplay","csplay"]) & filters.group & ~filters.edited)
@@ -760,7 +631,7 @@ async def jiosaavn(client: Client, message_: Message):
     try:
         user = await USER.get_me()
     except:
-        user.first_name = "xmusicbbot"
+        user.first_name = "DaisyMusic"
     usar = user
     wew = usar.id
     try:
@@ -794,7 +665,7 @@ async def jiosaavn(client: Client, message_: Message):
                     # print(e)
                     await lel.edit(
                         f"<b>🔴 Flood Wait Error 🔴 \nUser {user.first_name} couldn't join your channel due to heavy requests for userbot! Make sure user is not banned in group."
-                        "\n\nOr manually add @VCsMusicPlayer to your Group and try again</b>",
+                        "\n\nOr manually add @VCPlayBot to your Group and try again</b>",
                     )
     try:
         await USER.get_chat(chid)
@@ -818,7 +689,7 @@ async def jiosaavn(client: Client, message_: Message):
         sname = songs.result[0].song
         slink = songs.result[0].media_url
         ssingers = songs.result[0].singers
-        sthumb = "https://telegra.ph/file/cf19dda907391656338eb.png"
+        sthumb = "https://telegra.ph/file/f6086f8909fbfeb0844f2.png"
         sduration = int(songs.result[0].duration)
     except Exception as e:
         await res.edit("Found Literally Nothing!, You Should Work On Your English.")

@@ -1,9 +1,12 @@
-from pyrogram import Client, filters
+
+from pyrogram import Client
+from pyrogram import filters
 from pyrogram.errors import UserAlreadyParticipant
 import asyncio
-from xmusicbbot.helpers.decorators import authorized_users_only, errors
-from xmusicbbot.services.callsmusic.callsmusic import client as USER
-from xmusicbbot.config import SUDO_USERS
+from VCPlayBot.helpers.decorators import authorized_users_only
+from VCPlayBot.helpers.decorators import errors
+from VCPlayBot.services.callsmusic import client as USER
+from VCPlayBot.config import SUDO_USERS
 
 @Client.on_message(filters.command(["userbotjoin"]) & ~filters.private & ~filters.bot)
 @authorized_users_only
@@ -21,7 +24,7 @@ async def addchannel(client, message):
     try:
         user = await USER.get_me()
     except:
-        user.first_name = "MusicBot"
+        user.first_name = "VCPlayBot"
 
     try:
         await USER.join_chat(invitelink)
@@ -34,7 +37,7 @@ async def addchannel(client, message):
         print(e)
         await message.reply_text(
             f"<b>🛑 Flood Wait Error 🛑 \n User {user.first_name} couldn't join your group due to heavy join requests for userbot! Make sure user is not banned in group."
-            "\n\nOr manually add @VCsMusicPlayer to your Group and try again</b>",
+            "\n\nOr manually add @VCPlayAssistant to your Group and try again</b>",
         )
         return
     await message.reply_text(
@@ -95,7 +98,7 @@ async def addcchannel(client, message):
     try:
         user = await USER.get_me()
     except:
-        user.first_name = "MusicBot"
+        user.first_name = "VCPlayBot"
 
     try:
         await USER.join_chat(invitelink)
@@ -109,7 +112,7 @@ async def addcchannel(client, message):
         print(e)
         await message.reply_text(
             f"<b>🛑 Flood Wait Error 🛑 \n User {user.first_name} couldn't join your channel due to heavy join requests for userbot! Make sure user is not banned in channel."
-            "\n\nOr manually add @VCsMusicPlayer to your Group and try again</b>",
+            "\n\nOr manually add @VCPlayAssistant to your Group and try again</b>",
         )
         return
     await message.reply_text(
