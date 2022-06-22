@@ -1,18 +1,18 @@
 from typing import Dict
 
-from pytgcalls import GroupCall
+from pytgcalls import GroupCallFactory
 
-from xmusicbbot.services.callsmusic import client
-from xmusicbbot.services.queues import queues
+from VCPlayBot.services.callsmusic import client
+from VCPlayBot.services.queues import queues
 
 
-instances: Dict[int, GroupCall] = {}
+instances: Dict[int, GroupCallFactory] = {}
 active_chats: Dict[int, Dict[str, bool]] = {}
 
 
 def init_instance(chat_id: int):
     if chat_id not in instances:
-        instances[chat_id] = GroupCall(client)
+        instances[chat_id] = GroupCallFactory(client,outgoing_audio_bitrate_kbit=512).get_file_group_call()
 
     instance = instances[chat_id]
 
@@ -23,7 +23,7 @@ def init_instance(chat_id: int):
         if queues.is_empty(chat_id):
             await stop(chat_id)
         else:
-            instance.input_filename = queues.get(chat_id)["file"]
+            instance.input_filename = queues.get(chat_id)["file_path"]
 
 
 def remove(chat_id: int):
@@ -37,7 +37,7 @@ def remove(chat_id: int):
         del active_chats[chat_id]
 
 
-def get_instance(chat_id: int) -> GroupCall:
+def get_instance(chat_id: int) -> GroupCallFactory:
     init_instance(chat_id)
     return instances[chat_id]
 
@@ -82,23 +82,23 @@ def resume(chat_id: int) -> bool:
     return True
 
 
-def mute(chat_id: int) -> int:
+async def mute(chat_id: int) -> int:
     if chat_id not in active_chats:
         return 2
     elif active_chats[chat_id]["muted"]:
         return 1
 
-    get_instance(chat_id).set_is_mute(True)
+    await get_instance(chat_id).set_is_mute(True)
     active_chats[chat_id]["muted"] = True
     return 0
 
 
-def unmute(chat_id: int) -> int:
+async def unmute(chat_id: int) -> int:
     if chat_id not in active_chats:
         return 2
     elif not active_chats[chat_id]["muted"]:
         return 1
 
-    get_instance(chat_id).set_is_mute(False)
+    await get_instance(chat_id).set_is_mute(False)
     active_chats[chat_id]["muted"] = False
     return 0
