@@ -1,78 +1,42 @@
-<h1 align="centre">xmusicbbot v5.0</h1>
-
-### A bot that can play music on Telegram Group and Channel Voice Chats
-
-<p align="center">
-  <a href="https://github.com/baselabaza/xmusicbbot">
-     <img height="30px" src="https://img.shields.io/badge/Group%20Music%20Bot-red?style=for-the-badge&logo=github">
-  </a>
-</p>
-
-<p align="center">
-  <a href="https://telegra.ph/file/e8cc2e942567da80cab45.jpg">
-     <img height="200px" src="https://telegra.ph/file/e8cc2e942567da80cab45.jpg">
-  </a>
-</p>
-
-## Give your 💙
-
-Before clicking on deploy to heroku just click on fork and star just below
-
-<p align="center">
-  <a href="https://github.com/baselabaza/xmusicbbot/fork">
-    <img src="https://img.shields.io/github/forks/baselabaza/xmusicbbot?label=Fork&style=social">
-    
-  </a>
-  <a href="https://github.com/baselabaza/GroupMusicBot">
-    <img src="https://img.shields.io/github/stars/baselabaza/xmusicbbot?style=social">
-  </a>
-</p>
-
-## How to deploy 
+# How To Host
+The easiest way to deploy this Bot
+<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/QueenArzoo/VCPlayBot"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-red?style=for-the-badge&logo=heroku" width="220" height="38.45"/></a></p>
 
 
-### Deploy To Heroku 📡</h4>
+- Support Channel :- [Awesome Bot](http://t.me/LaylaList)
 
-<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/baselabaza/xmusicbbot"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku" width="210" height="34.45"/></a></p>
+- Support Group :- [Awesome Support](http://t.me/AwesomeSupport)
 
-###  GET STRING SESSION FROM REPL RUN
 
- [![Run on Repl.it](https://camo.githubusercontent.com/05149b448485553c6f14f6430a45c12dcc79ed3c/68747470733a2f2f7265706c2e69742f62616467652f6769746875622f6a61727669733231303930342f4a6172766973)](https://replit.com/@ZauteKm/GenerateStringSession#main.py)
+```
+Please fork this repository don't import code
+Made with Python3
+(C) @QueenArzoo
 
-### Deploy to VPS 🏃
-```sh
-# Install Git First (apt-instll git)
-$ git clone https://github.com/baselabaza/xmusicbbot
-$ cd xmusicbbot
-# Upgrade sources
-# Install All Requirements 
-$ pip3 install -r requirements.txt
-# Fork This Repo and fill local.env and config.py both with your own values.Then Start The Bot
-$ python3 -m xmusicbbot
 ```
 
-### Features ✅
 
-- Thumbnail Support
-- Playlist Support
-- Current playback support
-- Showing track names when skipping
-- Zero downtime, Fully Stable
-- DEEZER,YOUTUBE & SAAVN PLAYBACK SUPPORTED
-- Settings panel
-- Control with buttons
-- Userbot auto join
-- Channel Music Play
-- Keyboard selection support for YouTube play
 
-### Commands for Group 👥
-#### For all in group
+### Mandatory Vars.
+
+- Some Of The Mandatory Vars Are :-
+   - `API_ID` :  Give API_ID of your Alternate Telegram Account. also get from here [@APIInfoBot](https://t.me/APIinfoBot)
+   - `API_HASH` :  Give API_HASH of your Alternate Telegram Account. also get from here [@APIInfoBot](https://t.me/APIinfoBot)
+   - `STRING_NAME` :  Make a string session from [here](https://replit.com/@QueenArzoo/VCPlayBot)
+   - `BOT_TOKEN` :  Make a Bot from [@Botfather](https://t.me/botfather) and fill it's bot token.
+   - `SUDO_USERS` :  Fill Userid of yhe users whom you want to be able to control the bot. You can add multiple id by giving a space in b/w each id.
+
+Get STRING_NAME from here:  [![GenerateString](https://img.shields.io/badge/repl.it-generateString-yellowgreen)](https://replit.com/@QueenArzoo/VCPlayBot)
+
+
+
+
+
+## Commands 🛠
 
 - `/play <song name>` - play song you requested
-- `/play <reply to audio>` - play replied file
 - `/dplay <song name>` - play song you requested via deezer
 - `/splay <song name>` - play song you requested via jio saavn
-- `/ytplay <song name>`: Directly play song via YouTube Music
 - `/playlist` - Show now playing list
 - `/current` - Show now playing
 - `/song <song name>` - download songs you want quickly
@@ -81,7 +45,7 @@ $ python3 -m xmusicbbot
 - `/saavn <song name>` - download songs you want quickly via saavn
 - `/video <song name>` - download videos you want quickly
 
-### Admins only 🏅
+#### Admins only.
 - `/player` - open music player settings panel
 - `/pause` - pause song play
 - `/resume` - resume song play
@@ -89,12 +53,12 @@ $ python3 -m xmusicbbot
 - `/end` - stop music play
 - `/userbotjoin` - invite assistant to your chat
 - `/userbotleave` - remove assistant from your chat
-- `/reload` - Refresh admin list
-- `/musicplayer [on/off]` - Enable/Disable Music Player
+- `/admincache` - Refresh admin list
 
-### Channel Music Play 👨‍🎤
-*For linked group admins only:*
+### Commands for Channel Music Play 🛠
+For linked group admins only:
 - `/cplay <song name>` - play song you requested
+- `/cplay <reply to link>` - play replied youtube link
 - `/cplay <reply to audio>` - play replied file
 - `/cdplay <song name>` - play song you requested via deezer
 - `/csplay <song name>` - play song you requested via jio saavn
@@ -111,21 +75,21 @@ $ python3 -m xmusicbbot
 If you donlt like to play in linked channel:
  1. Get your channel ID.
  2. Rename your group to: Channel Music: your_channel_id
- 3. Add [@u100b](https://t.me/u100b) as Channel admin with full perms
+ 3. Add @VCPlayBot as Channel admin with full perms
  4. add helper to channel
  5. Simply send commands in your group.
 
-### Commands for Sudo Users 👮
+### Commands for Sudo Users ⚔️
 - `/userbotleaveall` - remove assistant from all chats
 - `/gcast <reply to message>` - globally brodcast replied message to all chats
 - `/pmpermit [on/off]` - enable/disable pmpermit message
 
-### PMpermit
+#### Pmpermit
 - `.a` - approove someone to pm you
 - `.da` - disapproove someone to pm you
 + Sudo Users can execute any command in any groups
 
-### Credits
 #### Special Credits
-- [Zaute-Km](https://github.com/Zaute-Km): baselabaza Developer
-- [Rojserbest](http://github.com/rojserbest): Callsmusic Developer
+- [Rojserbest](http://github.com/rojserbes): Callsmusic Developer
+- [Awesome Bot](http://t.me/LaylaList) Channel bot list
+- [Dev](http://t.me/HEROGAMERS1) Hero owner of this bot
