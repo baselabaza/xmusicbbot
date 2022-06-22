@@ -1,7 +1,7 @@
 import asyncio
 from os import path
 
-from xmusicbbot.helpers.errors import FFmpegReturnCodeError
+from VCPlayBot.helpers.errors import FFmpegReturnCodeError
 
 
 async def convert(file_path: str) -> str:
